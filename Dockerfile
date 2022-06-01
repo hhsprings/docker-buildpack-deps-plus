@@ -1,5 +1,5 @@
 #
-ARG _BUILDPACKDEPS_TAG=22.04
+ARG _BUILDPACKDEPS_TAG=${_BUILDPACKDEPS_TAG:-22.04}
 FROM buildpack-deps:${_BUILDPACKDEPS_TAG}
 ARG __APT_Y="-yq --no-install-recommends"
 
@@ -15,3 +15,10 @@ RUN apt-get install ${__APT_Y} yasm
 RUN apt-get install ${__APT_Y} cmake
 RUN apt-get install ${__APT_Y} libtiff-dev
 RUN apt-get install ${__APT_Y} libopenjp2-7-dev
+
+# ----------------------------------------------------------
+#
+# Cleanup
+#
+# ----------------------------------------------------------
+RUN rm -rf /var/lib/apt/lists/*
