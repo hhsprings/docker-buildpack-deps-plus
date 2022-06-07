@@ -29,7 +29,7 @@ for bpd_ver in `tac _suites | grep -v ^#` ; do
     docker buildx build -f Dockerfile \
            ${t_opt} \
            --build-arg _BUILDPACKDEPS_TAG=${bpd_ver} \
-           --platform arm64v8 \
+           --platform linux/arm64/v8 \
            -o type=image,push=${__push} \
            .
 done
