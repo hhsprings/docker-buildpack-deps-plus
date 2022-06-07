@@ -1,5 +1,4 @@
-#!/bin/bash
-# shebang must be /bin/bash because of arm64
+#! /bin/sh
 export _PLATFORM=${1:-"linux/amd64"}
 export _BUILDPACKDEPS_PLAT=${2:-""}
 export __push=$(if test "z${3:-''}" = "z--push" ; then echo true ; else echo false ; fi)
