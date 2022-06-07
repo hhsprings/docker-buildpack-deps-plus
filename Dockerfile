@@ -1,7 +1,6 @@
 #
 ARG _BUILDPACKDEPS_TAG=22.04
-ARG _BUILDPACKDEPS_PLAT=
-FROM ${_BUILDPACKDEPS_PLAT}buildpack-deps:${_BUILDPACKDEPS_TAG}
+FROM buildpack-deps:${_BUILDPACKDEPS_TAG}
 ARG __APT_Y="-yq --no-install-recommends"
 
 # ----------------------------------------------------------
