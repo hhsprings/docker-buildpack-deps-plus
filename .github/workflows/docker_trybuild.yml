@@ -20,4 +20,8 @@ jobs:
 
       - name: docker build buildpack-deps-plus
         run: >
-          sh ./build.sh "linux/arm64/v8" "arm64v8/"
+          sh ./build.sh "linux/amd64" ""
+
+      #- name: docker build buildpack-deps-plus
+      #  run: >
+      #    sh ./build.sh "linux/arm64/v8" "arm64v8/"
