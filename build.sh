@@ -24,9 +24,9 @@ for myver in 0.2 latest ; do
                .
 
         if test "${myver}" = "latest" ; then
-            docker build -f Dockerfile \
-                   -t hhsprings/buildpack-deps-plus:latest \
-                   --build-arg _BUILDPACKDEPS_TAG=${bpd_ver} .
+            docker tag \
+                   hhsprings/buildpack-deps-plus:${t} \
+                   hhsprings/buildpack-deps-plus:latest
         fi
     done
 done
