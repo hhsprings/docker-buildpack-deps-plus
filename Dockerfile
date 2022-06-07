@@ -10,7 +10,8 @@ ARG __APT_Y="-yq --no-install-recommends"
 # install but are very often needed.
 #
 # ----------------------------------------------------------
-RUN apt-get update
+RUN apt-get -q update && \
+    apt-get ${__APT_Y} upgrade
 RUN apt-get install ${__APT_Y} yasm
 RUN apt-get install ${__APT_Y} cmake
 RUN apt-get install ${__APT_Y} libexpat1-dev
