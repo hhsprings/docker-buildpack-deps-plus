@@ -19,5 +19,7 @@ jobs:
           docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
 
       - name: docker build buildpack-deps-plus
+        env:
+          GO_ARCH: arm64
         run: >
           sh ./build.sh "linux/arm64/v8" "arm64v8/"
