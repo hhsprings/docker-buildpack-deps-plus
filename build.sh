@@ -10,18 +10,24 @@ bullseye
 buster
 sid
 stretch
-xenial 16.04
-bionic 18.04
-focal 20.04
-hirsute 21.04
-impish 21.10
-jammy 22.04
-kinetic 22.10
+xenial
+16.04
+bionic
+18.04
+focal
+20.04
+hirsute
+21.04
+impish
+21.10
+jammy
+22.04
+kinetic
+22.10
 __EOF__
 
 docker buildx create --name=mybuilder --use
-for bpd_ver in `tac _suites | sed 's@ @\
-@g' | grep -v ^#` ; do
+for bpd_ver in `tac _suites | grep -v ^#` ; do
     t="${myver}-from-${bpd_ver}"
     t_opt="-t hhsprings/buildpack-deps-plus:${t}"
     if test "${bpd_ver}" = "${target_latest}" ; then
