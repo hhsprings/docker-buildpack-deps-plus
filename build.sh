@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/sh -x
 export __push=$(if test "z${1}" = "z--push" ; then echo true ; else echo false ; fi)
 myver=0.3
 target_latest=22.10
