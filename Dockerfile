@@ -1,6 +1,6 @@
 #
 ARG _BUILDPACKDEPS_TAG=22.04
-FROM arm64v8/buildpack-deps:${_BUILDPACKDEPS_TAG}
+FROM --platform=linux/arm64/v8 buildpack-deps:${_BUILDPACKDEPS_TAG}
 ARG __APT_Y="-yq --no-install-recommends"
 
 # ----------------------------------------------------------
@@ -9,7 +9,7 @@ ARG __APT_Y="-yq --no-install-recommends"
 # install but are very often needed.
 #
 # ----------------------------------------------------------
-RUN apt-get update || true
+RUN apt-get update
 RUN apt-get install ${__APT_Y} yasm
 RUN apt-get install ${__APT_Y} cmake
 RUN apt-get install ${__APT_Y} libexpat1-dev
