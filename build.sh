@@ -1,5 +1,7 @@
 #! /bin/sh
-export __push=$(if test "z${1}" = "z--push" ; then echo true ; else echo false ; fi)
+export _PLATFORM=${1:-"linux/amd64"}
+export _BUILDPACKDEPS_PLAT=${2:-""}
+export __push=$(if test "z${3:-''}" = "z--push" ; then echo true ; else echo false ; fi)
 myver=0.3
 target_latest=22.10
 
@@ -29,8 +31,8 @@ for bpd_ver in `tac _suites | grep -v ^#` ; do
     docker build -f Dockerfile \
            ${t_opt} \
            --build-arg _BUILDPACKDEPS_TAG=${bpd_ver} \
-           --build-arg _BUILDPACKDEPS_PLAT="" \
-           --platform linux/amd64 \
+           --build-arg _BUILDPACKDEPS_PLAT="${_BUILDPACKDEPS_PLAT}" \
+           --platform ${_PLATFORM} \
            .
 done
 #linux/amd64,linux/ppc64le,linux/arm64/v8,linux/mips64le,linux/riscv64,linux/i386,linux/arm/v7,linux/arm/v5,linux/s390x
