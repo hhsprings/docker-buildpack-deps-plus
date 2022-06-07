@@ -1,6 +1,6 @@
 #
 ARG _BUILDPACKDEPS_TAG=22.04
-FROM ppc64le/buildpack-deps:${_BUILDPACKDEPS_TAG}
+FROM arm64v8/buildpack-deps:${_BUILDPACKDEPS_TAG}
 ARG __APT_Y="-yq --no-install-recommends"
 
 # ----------------------------------------------------------
