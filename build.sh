@@ -31,7 +31,6 @@ for bpd_ver in `tac _suites | sed 's@ @\
            ${t_opt} \
            --build-arg _BUILDPACKDEPS_TAG=${bpd_ver} \
            --platform linux/amd64,linux/ppc64le,linux/arm64/v8,linux/arm/v7,linux/s390x \
-           -o type=image,push=${__push}
+           -o type=image,push=${__push} \
            .
-
 done
