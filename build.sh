@@ -26,7 +26,7 @@ kinetic
 22.10
 __EOF__
 
-docker buildx create --name=mybuilder --use  # for multiple platforms
+#docker buildx create --name=mybuilder --use  # for multiple platforms
 for bpd_ver in `tac _suites | grep -v ^#` ; do
     t="${myver}-from-${bpd_ver}"
     t_opt="-t hhsprings/buildpack-deps-plus:${t}"
