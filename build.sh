@@ -25,7 +25,7 @@ jammy
 kinetic
 22.10
 __EOF__
-
+#linux/amd64
 for bpd_ver in `tac _suites | grep -v ^#` ; do
     t="${myver}-from-${bpd_ver}"
     t_opt="-t hhsprings/buildpack-deps-plus:${t}"
@@ -35,7 +35,7 @@ for bpd_ver in `tac _suites | grep -v ^#` ; do
     docker buildx build -f Dockerfile \
            ${t_opt} \
            --build-arg _BUILDPACKDEPS_TAG=${bpd_ver} \
-           --platform linux/amd64 \
+           --platform linux/ppc64le \
            -o type=image,push=${__push} \
            .
 done
