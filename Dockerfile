@@ -1,6 +1,6 @@
 #
 ARG _BUILDPACKDEPS_TAG=22.04
-FROM --platform=linux/amd64,linux/ppc64le,linux/arm64/v8,linux/mips64le,linux/riscv64,linux/i386,linux/arm/v7,linux/arm/v5,linux/s390x buildpack-deps:${_BUILDPACKDEPS_TAG}
+FROM buildpack-deps:${_BUILDPACKDEPS_TAG}
 ARG __APT_Y="-yq --no-install-recommends"
 
 # ----------------------------------------------------------
