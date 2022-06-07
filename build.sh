@@ -10,20 +10,13 @@ bullseye
 buster
 sid
 stretch
-xenial
-16.04
-bionic
-18.04
-focal
-20.04
-hirsute
-21.04
-impish
-21.10
-jammy
-22.04
-kinetic
-22.10
+xenial 16.04
+bionic 18.04
+focal 20.04
+hirsute 21.04
+impish 21.10
+jammy 22.04
+kinetic 22.10
 __EOF__
 
 #docker buildx create --name=mybuilder --use  # for multiple platforms
@@ -36,7 +29,6 @@ for bpd_ver in `tac _suites | grep -v ^#` ; do
     docker buildx build -f Dockerfile \
            ${t_opt} \
            --build-arg _BUILDPACKDEPS_TAG=${bpd_ver} \
-           --build-arg _BUILDPACKDEPS_PLAT="" \
            --platform linux/amd64 \
            -o type=image,push=${__push} \
            .
