@@ -36,7 +36,7 @@ for bpd_ver in `tac _suites | grep -v ^#` ; do
     docker buildx build -f Dockerfile \
            ${t_opt} \
            --build-arg _BUILDPACKDEPS_TAG=${bpd_ver} \
-           --platform linux/arm/v6 \
+           --platform linux/amd64 \
            -o type=image,push=${__push} \
            .
 done
