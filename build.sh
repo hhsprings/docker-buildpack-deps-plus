@@ -1,4 +1,4 @@
-#! /bin/sh -x
+#! /bin/sh
 export __push=$(if test "z${1}" = "z--push" ; then echo true ; else echo false ; fi)
 myver=0.3
 target_latest=22.10
@@ -19,7 +19,7 @@ jammy 22.04
 kinetic 22.10
 __EOF__
 
-docker buildx create --name mybuilder --use
+docker buildx create --name=mybuilder --use
 for bpd_ver in `tac _suites` ; do
     t="${myver}-from-${bpd_ver}"
     t_opt="-t hhsprings/buildpack-deps-plus:${t}"
