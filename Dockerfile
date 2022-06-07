@@ -1,6 +1,6 @@
 #
 ARG _BUILDPACKDEPS_TAG=22.04
-FROM buildpack-deps:${_BUILDPACKDEPS_TAG}
+FROM --platform=$BUILDPLATFORM buildpack-deps:${_BUILDPACKDEPS_TAG}
 ARG __APT_Y="-yq --no-install-recommends"
 
 # ----------------------------------------------------------
