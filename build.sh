@@ -28,17 +28,23 @@ for bpd_ver in `tac _suites | grep -v ^#` ; do
     if test "z${_BUILDPACKDEPS_PLAT}" != "z" ; then
         pt=-`echo ${_BUILDPACKDEPS_PLAT} | sed 's@/$@@'`
     fi
-    t_opt="-t hhsprings/buildpack-deps-plus:${t}${pt}"
-    if test "${bpd_ver}" = "${target_latest}" ; then
-        t_opt="${t_opt} -t hhsprings/buildpack-deps-plus:latest${pt}"
+    if curl -s https://registry.hub.docker.com/v1/repositories/hhsprings/buildpack-deps-plus/tags | sed 's@\("name": \)@\
+\1@g' | grep ^'"name' | sed 's@^"name": "\([^"]*\)".*@\1@' | \
+            grep "^${t}${pt}" ; then
+        echo "${t}${pt}: already exits"
+    else
+        t_opt="-t hhsprings/buildpack-deps-plus:${t}${pt}"
+        if test "${bpd_ver}" = "${target_latest}" ; then
+            t_opt="${t_opt} -t hhsprings/buildpack-deps-plus:latest${pt}"
+        fi
+        docker buildx build -f Dockerfile \
+               ${t_opt} \
+               --build-arg _BUILDPACKDEPS_TAG=${bpd_ver} \
+               --build-arg _BUILDPACKDEPS_PLAT="${_BUILDPACKDEPS_PLAT}" \
+               --platform ${_PLATFORM} \
+               -o type=image,push=${__push} \
+               .
     fi
-    docker buildx build -f Dockerfile \
-           ${t_opt} \
-           --build-arg _BUILDPACKDEPS_TAG=${bpd_ver} \
-           --build-arg _BUILDPACKDEPS_PLAT="${_BUILDPACKDEPS_PLAT}" \
-           --platform ${_PLATFORM} \
-           -o type=image,push=${__push} \
-           .
 done
 docker buildx prune -a -f
 #linux/amd64,linux/ppc64le,linux/arm64/v8,linux/mips64le,linux/riscv64,linux/i386,linux/arm/v7,linux/arm/v5,linux/s390x
