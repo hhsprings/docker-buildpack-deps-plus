@@ -24,9 +24,13 @@ __EOF__
 #docker buildx create --name=mybuilder --use  # for multiple platforms
 for bpd_ver in `tac _suites | grep -v ^#` ; do
     t="${myver}-from-${bpd_ver}"
-    t_opt="-t hhsprings/buildpack-deps-plus:${t}"
+    pt=""
+    if test "z${_BUILDPACKDEPS_PLAT}" != "z" ; then
+        pt=-`echo ${_BUILDPACKDEPS_PLAT} | sed 's@/$@@'`
+    fi
+    t_opt="-t hhsprings/buildpack-deps-plus:${t}${pt}"
     if test "${bpd_ver}" = "${target_latest}" ; then
-        t_opt="${t_opt} -t hhsprings/buildpack-deps-plus:latest"
+        t_opt="${t_opt} -t hhsprings/buildpack-deps-plus:latest${pt}"
     fi
     docker buildx build -f Dockerfile \
            ${t_opt} \
