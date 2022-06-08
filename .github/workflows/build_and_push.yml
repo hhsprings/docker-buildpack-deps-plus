@@ -1,0 +1,27 @@
+name: docker build, then push - [buildpack-deps-plus]
+
+# Controls when the workflow will run
+#on: [push]
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@main
+
+      - name: docker login
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: >
+          docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
+
+      - name: docker build buildpack-deps-plus
+        run: >
+          sh ./build.sh "linux/amd64" "" --push
+
+      #- name: docker build buildpack-deps-plus
+      #  run: >
+      #    sh ./build.sh "linux/arm64/v8" "arm64v8/"
