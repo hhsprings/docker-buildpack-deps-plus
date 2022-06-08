@@ -25,10 +25,22 @@ jobs:
         run: >
           docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
 
-      - name: docker build buildpack-deps-plus
+      - name: docker build buildpack-deps-plus (linux/amd64)
         run: >
           sh ./build.sh "linux/amd64" "" --push
 
-      #- name: docker build buildpack-deps-plus
-      #  run: >
-      #    sh ./build.sh "linux/arm64/v8" "arm64v8/"
+      - name: docker build buildpack-deps-plus (linux/arm64/v8)
+        run: >
+          sh ./build.sh "linux/arm64/v8" "arm64v8/" --push
+
+      - name: docker build buildpack-deps-plus (linux/arm/v7)
+        run: >
+          sh ./build.sh "linux/arm/v7" "arm32v7/" --push
+
+      - name: docker build buildpack-deps-plus (linux/s390x)
+        run: >
+          sh ./build.sh "linux/s390x" "s390x/" --push
+
+      - name: docker build buildpack-deps-plus (linux/riscv64)
+        run: >
+          sh ./build.sh "linux/riscv64" "riscv64/" --push
