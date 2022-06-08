@@ -39,6 +39,6 @@ for bpd_ver in `tac _suites | grep -v ^#` ; do
            --platform ${_PLATFORM} \
            -o type=image,push=${__push} \
            .
-    docker buildx prune -a
 done
+docker buildx prune -a -f
 #linux/amd64,linux/ppc64le,linux/arm64/v8,linux/mips64le,linux/riscv64,linux/i386,linux/arm/v7,linux/arm/v5,linux/s390x
